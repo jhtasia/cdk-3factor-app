@@ -1,0 +1,6 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.sortImports": true
+  },
+  "editor.formatOnSave": true,
+}
