@@ -1,0 +1,14 @@
+{
+  "name": "js-resolver",
+  "devDependencies": {
+    "@aws-appsync/utils": "^1.9.0",
+    "@aws-sdk/client-appsync": "^3.645.0",
+    "@typescript-eslint/parser": "^8.4.0",
+    "esbuild": "^0.23.1",
+    "typescript": "*"
+  },
+  "dependencies": {},
+  "bundledDependencies": [],
+  "license": "Apache-2.0",
+  "version": "0.0.1"
+}

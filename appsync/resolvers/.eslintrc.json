@@ -1,0 +1,11 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "project": ["./tsconfig.json"]
+  },
+  "extends": ["plugin:@aws-appsync/recommended"],
+  "rules": {
+    "import/no-extraneous-dependencies": "off"
+  },
+  "root": true
+}
