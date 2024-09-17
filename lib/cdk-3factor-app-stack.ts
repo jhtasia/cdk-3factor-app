@@ -6,6 +6,7 @@ import {
   NodejsFunctionProps,
 } from "aws-cdk-lib/aws-lambda-nodejs";
 import { Construct } from "constructs";
+import { defineSchema } from "../appsync/schema/utils";
 import { lambdaDsInfoMap, taskInfoMap } from "../lambda";
 import { valTransform } from "../utils";
 import { DynamoDBState } from "./ddb-state-construct";
@@ -44,6 +45,11 @@ export class Cdk3FactorAppStack extends Stack {
         ),
       },
     });
+    defineSchema(
+      this.codeFirstGraphqlApi.apiSchema,
+      this.codeFirstGraphqlApi.apiDataSources
+    );
+    this.codeFirstGraphqlApi.apiSchema;
     this.eventSystem = new EventSystem(this, "EventSystem", {
       apiSetting: {
         api: this.codeFirstGraphqlApi.api,

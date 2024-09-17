@@ -19,6 +19,7 @@ import {
   NodejsFunctionProps,
 } from "aws-cdk-lib/aws-lambda-nodejs";
 import { Construct } from "constructs";
+import { FunctionInfoMap } from "../utils";
 import { TaskMap } from "./tasks-construct";
 
 interface EventSystemProps<FIM extends FunctionInfoMap> extends ResourceProps {
@@ -79,23 +80,25 @@ export class EventSystem<FIM extends FunctionInfoMap> extends Resource {
         })
     );
 
-    const transformFunc = new NodejsFunction(this, "transformFunc", {
-      ...stateStreamSetting.transformFuncProps,
-      environment: {
-        ...stateStreamSetting.transformFuncProps.environment,
-        EVENT_BUS_NAME: this.eventBus.eventBusName,
-      },
-    });
+    if (Object.keys(stateStreamSetting.transformFuncProps).length > 0) {
+      const transformFunc = new NodejsFunction(this, "transformFunc", {
+        ...stateStreamSetting.transformFuncProps,
+        environment: {
+          ...stateStreamSetting.transformFuncProps.environment,
+          EVENT_BUS_NAME: this.eventBus.eventBusName,
+        },
+      });
 
-    transformFunc.addEventSource(
-      new KinesisEventSource(stateStreamSetting.stream, {
-        batchSize: 1,
-        startingPosition: StartingPosition.TRIM_HORIZON,
-        retryAttempts: 2,
-        filters: stateStreamSetting.filters,
-      })
-    );
+      transformFunc.addEventSource(
+        new KinesisEventSource(stateStreamSetting.stream, {
+          batchSize: 1,
+          startingPosition: StartingPosition.TRIM_HORIZON,
+          retryAttempts: 2,
+          filters: stateStreamSetting.filters,
+        })
+      );
 
-    this.eventBus.grantPutEventsTo(transformFunc);
+      this.eventBus.grantPutEventsTo(transformFunc);
+    }
   }
 }
