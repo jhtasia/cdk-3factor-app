@@ -1,0 +1,47 @@
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+scalar AWSDateTime
+scalar AWSTimestamp
+scalar AWSJSON
+scalar AWSURL
+scalar AWSDate
+scalar AWSBoolean
+scalar AWSDecimal
+scalar AWSID
+scalar AWSIPAddress
+enum TodoStatus {
+  done
+  pending
+}
+type Todo {
+  id: ID!
+  name: String!
+  description: String!
+  priority: Int!
+  status: TodoStatus!
+  created: AWSDateTime!
+  updated: AWSDateTime!
+  assignee: User
+}
+type User {
+  id: ID!
+  name: String
+}
+input TodoCreateInput {
+  name: String!
+  description: String!
+  priority: Int
+}
+type Query {
+  todo(id: String!): Todo
+}
+type Mutation {
+  todoCreate(input: TodoCreateInput!): Todo
+}
+type Subscription {
+  todoUpdated: Todo!
+}

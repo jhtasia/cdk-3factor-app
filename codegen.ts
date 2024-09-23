@@ -2,9 +2,9 @@ import type { CodegenConfig } from "@graphql-codegen/cli";
 
 const config: CodegenConfig = {
   overwrite: true,
-  schema: "./appsync/schema/example.graphql",
+  schema: "schema.graphql",
   generates: {
-    "./appsync/schema/graphql-schema-types.ts": {
+    "./bin/api/schema/graphql-schema-types.ts": {
       plugins: ["typescript"],
       config: {
         scalars: {
