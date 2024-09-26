@@ -9,6 +9,7 @@
     "gen-graphql-schema-types": "ts-node bin/api/schema/gen-schema-script.ts && npx graphql-codegen-esm"
   },
   "devDependencies": {
+    "@aws-sdk/util-dynamodb": "^3.656.0",
     "@graphql-codegen/cli": "^5.0.2",
     "@graphql-codegen/typescript": "^4.0.9",
     "@types/jest": "^26.0.10",

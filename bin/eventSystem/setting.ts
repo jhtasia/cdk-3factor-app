@@ -1,25 +1,35 @@
-import { RuleTargetInput } from "aws-cdk-lib/aws-events";
+import { EventField, RuleTargetInput } from "aws-cdk-lib/aws-events";
 import { ApiRule } from "../../lib/constructs/3factor-event-system-construct";
 
 export const apiRules = [
   {
-    ruleName: "todoUpdated",
+    ruleName: "TodoCreated",
     eventPattern: {
-      detailType: ["TodoUpdated"],
+      detail: {
+        name: ["TodoCreated"],
+      },
     },
     graphQLOperation: `
-  mutation Request($todo: Todo!) {
-    todoUpdatedPublish(todo: $todo) {
+mutation TodoCreatedPublish($message: TodoInput!) {
+  todoCreatedPublish(message: $message) {
+    assignee {
       id
       name
-      description
-      priority
-      status
-      created
-      updated
     }
+    created
+    description
+    id
+    name
+    priority
+    status
+    updated
   }
+}
+
 `,
-    variables: RuleTargetInput.fromObject({ todo: "$.detail" }),
+    variables: RuleTargetInput.fromObject({
+      message: EventField.fromPath("$.detail.data"),
+    }),
+    retryAttempts: 3,
   },
 ] as const satisfies ApiRule[];

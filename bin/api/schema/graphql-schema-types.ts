@@ -26,6 +26,8 @@ export type Scalars = {
 export type Mutation = {
   __typename?: 'Mutation';
   todoCreate?: Maybe<Todo>;
+  todoCreatedPublish?: Maybe<Todo>;
+  userCreate?: Maybe<User>;
 };
 
 
@@ -33,9 +35,20 @@ export type MutationTodoCreateArgs = {
   input: TodoCreateInput;
 };
 
+
+export type MutationTodoCreatedPublishArgs = {
+  input: TodoCreatedPublishInput;
+};
+
+
+export type MutationUserCreateArgs = {
+  input: UserCreateInput;
+};
+
 export type Query = {
   __typename?: 'Query';
   todo?: Maybe<Todo>;
+  user?: Maybe<User>;
 };
 
 
@@ -43,9 +56,14 @@ export type QueryTodoArgs = {
   id: Scalars['String']['input'];
 };
 
+
+export type QueryUserArgs = {
+  id: Scalars['String']['input'];
+};
+
 export type Subscription = {
   __typename?: 'Subscription';
-  todoUpdated: Todo;
+  todoCreated: Todo;
 };
 
 export type Todo = {
@@ -61,9 +79,24 @@ export type Todo = {
 };
 
 export type TodoCreateInput = {
+  assigneeId?: InputMaybe<Scalars['String']['input']>;
   description: Scalars['String']['input'];
   name: Scalars['String']['input'];
   priority?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type TodoCreatedPublishInput = {
+  input: Todo;
+};
+
+export type TodoInput = {
+  created: Scalars['AWSDateTime']['input'];
+  description: Scalars['String']['input'];
+  id: Scalars['ID']['input'];
+  name: Scalars['String']['input'];
+  priority: Scalars['Int']['input'];
+  status: TodoStatus;
+  updated: Scalars['AWSDateTime']['input'];
 };
 
 export enum TodoStatus {
@@ -74,5 +107,9 @@ export enum TodoStatus {
 export type User = {
   __typename?: 'User';
   id: Scalars['ID']['output'];
-  name?: Maybe<Scalars['String']['output']>;
+  name: Scalars['String']['output'];
+};
+
+export type UserCreateInput = {
+  name: Scalars['String']['input'];
 };

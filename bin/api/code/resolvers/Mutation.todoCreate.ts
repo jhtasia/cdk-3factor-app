@@ -14,6 +14,7 @@ export const request = (context: Context): DynamoDBPutItemRequest => {
     item: {
       pk: `TODO#${todoId}`,
       sk: `TODO#${todoId}`,
+      _type: "TODO",
       id: todoId,
       status: TodoStatus.Pending,
       priority: 1,

@@ -8,7 +8,7 @@ export const rules = [
   {
     ruleName: "LambdaEventHandlerRule",
     eventPattern: {
-      detailType: ["TodoAssigneeUpdated"],
+      detail: ["StateChanged"],
     },
     func: "LambdaEventHandler",
   },

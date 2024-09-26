@@ -2,9 +2,10 @@ import * as cdk from "aws-cdk-lib";
 import { Cdk3FactorAppStack } from "../lib/stack/cdk-3factor-app-stack";
 import { apiRules } from "./eventSystem/setting";
 import {
+  enrichmentFuncEntry,
+  enrichmentInputTrasformation,
   eventFilters,
-  eventTransformationEntry,
-  eventTransformationInput,
+  targetInputTrasformation,
 } from "./state/setting";
 import { functions, rules } from "./task/setting";
 
@@ -17,8 +18,9 @@ const stack = new Cdk3FactorAppStack(app, "ThreeFactorApp", {
   },
   stateSetting: {
     eventFilters,
-    eventTransformationInput,
-    eventTransformationEntry,
+    enrichmentInputTrasformation,
+    enrichmentFuncEntry,
+    targetInputTrasformation,
   },
   eventSystemSetting: {
     apiRules,

@@ -79,8 +79,6 @@ export class EventBusTarget implements ITarget {
 
     return {
       targetParameters: {
-        inputTemplate:
-          this.eventBusParameters.inputTransformation?.bind(pipe).inputTemplate,
         eventBridgeEventBusParameters: this.eventBusParameters,
       },
     };

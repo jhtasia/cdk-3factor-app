@@ -29,19 +29,39 @@ type Todo {
 }
 type User {
   id: ID!
-  name: String
+  name: String!
 }
 input TodoCreateInput {
   name: String!
   description: String!
+  assigneeId: String
   priority: Int
+}
+input TodoCreatedPublishInput {
+  input: Todo!
+}
+input UserCreateInput {
+  name: String!
+}
+input TodoInput {
+  id: ID!
+  name: String!
+  description: String!
+  priority: Int!
+  status: TodoStatus!
+  created: AWSDateTime!
+  updated: AWSDateTime!
 }
 type Query {
   todo(id: String!): Todo
+  user(id: String!): User
 }
 type Mutation {
   todoCreate(input: TodoCreateInput!): Todo
+  userCreate(input: UserCreateInput!): User
+  todoCreatedPublish(input: TodoCreatedPublishInput!): Todo
 }
 type Subscription {
-  todoUpdated: Todo!
+  todoCreated: Todo!
+  @aws_subscribe(mutations: ["todoCreatedPublish"])
 }

@@ -6,6 +6,7 @@ import {
   Definition,
   DynamoDbDataSource,
   EventBridgeDataSource,
+  FieldLogLevel,
   GraphqlApi,
   IGraphqlApi,
   LambdaDataSource,
@@ -104,6 +105,9 @@ export class CodeFirstGraphqlApi<
         additionalAuthorizationModes: [
           { authorizationType: AuthorizationType.IAM },
         ],
+      },
+      logConfig: {
+        fieldLogLevel: FieldLogLevel.INFO,
       },
     });
 

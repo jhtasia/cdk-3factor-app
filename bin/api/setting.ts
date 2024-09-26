@@ -17,6 +17,10 @@ export const functions = {
     dataSource: "ddb",
     code: bundle(path.join(__dirname, "code/functions/getUser.ts")),
   },
+  publishMessage: {
+    dataSource: "none",
+    code: bundle(path.join(__dirname, "code/functions/publishMessage.ts")),
+  },
 } as const satisfies {
   [name: string]: {
     dataSource: DataSourceName;

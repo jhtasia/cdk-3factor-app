@@ -1,8 +1,9 @@
-import { GraphqlType, ObjectType } from "awscdk-appsync-utils";
+import { Directive, GraphqlType, ObjectType } from "awscdk-appsync-utils";
 import { enumTypeMap } from "./enum-types";
 
 export const objectTypeMap = {
   Todo: new ObjectType("Todo", {
+    directives: [Directive.apiKey(), Directive.iam()],
     definition: {
       id: GraphqlType.id({ isRequired: true }),
       name: GraphqlType.string({ isRequired: true }),
